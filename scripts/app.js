@@ -153,6 +153,8 @@
                    models if selected item is 'All'. Reset the collection in 
                    order to repopulate it with all of the models */
                 this.collection.reset(contacts);
+                /* Update the url with the selected type - 'all'. */
+                contactsRouter.navigate("filter/all");
             } else {
                 this.collection.reset(contacts, {
                     silent: true
@@ -164,12 +166,15 @@
                 });
 
                 var filterType = this.filterType;
+                /* filter down the collection to only those models containing a specific type */
                 var filtered = _.filter(this.collection.models, function (item) {
                     return item.get("type").toLowerCase() === filterType;
                 });
                 /* Reset the collection in order to 
                    repopulate it with the filtered models. */
                 this.collection.reset(filtered);
+                /* Update the url with the selected type. */
+                contactsRouter.navigate("filter/" + filterType);
             }
         }
     });
