@@ -8,15 +8,25 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-    </nav>
-    
-    <div id="main"></div>
+
+
+    <div id="main">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a>
+                </li>
+                <li><a href="#">Contacts</a>
+                </li>
+                <li><a href="#">About</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <div id="filter">
+                <label>Show me:</label>
+            </div>
+        </header>
+    </div>
 
     <script id="contactTemplate" type="text/template">
         <img src="<%=photo %>" alt="<%=name %>" />
