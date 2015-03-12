@@ -9,7 +9,7 @@
         },
         {
             name: "Contact 2",
-            address: "1, a street, a town, a city, AB12 3CD",
+            address: "3333, a street, a town, a city, AB12 3CD",
             phone: "0123456789",
             email: "anemail@me.com",
             type: "family"
@@ -77,7 +77,23 @@
         tagName: "article",
         className: "contact-container",
         template: $("#contactTemplate").html(),
+        events: {
+            "click button.delete": "deleteContact"
+        },
+        deleteContact: function () {
+            /* First store the type of the contact that we just deleted. */
+            var removedType = this.model.get("type").toLowerCase();
+            this.model.destroy();
+            /* remove the HTML representation of the view from the page. */
+            this.remove();
 
+            /* Get all of the types of the models in the directory collection and 
+               check to see if the type of the contact that was just removed is 
+               still contained within the resulting array. */
+            if (_.indexOf(directory.getTypes(), removedType) === -1) {
+                directory.$el.find("#filter select").children("[value='" + removedType + "']").remove();
+            }
+        },
         render: function () {
             var tmpl = _.template(this.template);
 
@@ -98,9 +114,10 @@
             /* Listening for the reset event and the function that 
                wish to invoke is the collection's render() method */
             this.collection.on("reset", this.render, this);
-            
+
             this.collection.on("add", this.renderContact, this);
-            
+            this.collection.on("remove", this.removeContact, this);
+
             this.render();
         },
         render: function () {
@@ -118,13 +135,33 @@
             });
             this.$el.append(contactView.render().el);
         },
+        removeContact: function (removedModel) {
+            var removed = removedModel.attributes;
+
+            /* The original items in the contacts array didn't have the photo property
+               defined, but as this is specified as a default property, all of our models 
+               will inherit the property and will therefore fail any comparison with 
+               the objects in the contacts array. So check the photo property of the 
+               model is the same as the default value and if it is remove it. */
+            if (removed.photo === "/imgs/placeholder.png") {
+                delete removed.photo;
+            }
+
+            _.each(contacts, function (contact) {
+                if (_.isEqual(contact, removed)) {
+                    contacts.splice(_.indexOf(contacts, contact), 1);
+                }
+            });
+        },
         events: {
             /* Hooking the change event that will be fired by the
                <select /> element within the '#filter' container. */
             "change #filter select": "setFilter",
-            /*  Hooking the click event triggered by the element 
-                with an id of add*/
-            "click #add": "addContact"
+            /* Hooking the click event triggered by the element 
+               with an id of add*/
+            "click #add": "addContact",
+            /* Hide the addContact first and show when clicked */
+            "click #showForm": "showForm"
         },
         getTypes: function () {
             /* Method to extract each unique contact 'type' and returns 
@@ -210,6 +247,9 @@
             } else {
                 this.collection.add(new Contact(newModel));
             }
+        },
+        showForm: function(){
+            this.$el.find("#addContact").slideToggle();
         }
     });
 

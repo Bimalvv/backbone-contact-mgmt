@@ -156,7 +156,7 @@ header:after {
 
 #addContact {
     display: none;
-    width: 466px;
+    width: 570px;
     float: right;
     clear: both;
     font-family: sans-serif;
@@ -170,7 +170,7 @@ header:after {
     line-height: 25px;
 }
 
-/*#addContact label,
+#addContact label,
 #addContact input {
     display: block;
     margin-bottom: 10px;
@@ -178,7 +178,7 @@ header:after {
 }
 
 #address {
-    width: 380px;
+    width: 414px;
     margin-left: 2px;
 }
 
@@ -193,4 +193,4 @@ header:after {
     margin: 10px 10px 0 0;
     float: right;
     clear: both;
-}*/
+}

@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Backbone.js Web App</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="styles/styles.css" />
 </head>
 
 <body>
-
-
     <div id="main">
         <nav>
             <ul>
@@ -31,14 +33,48 @@
                 <label>Show me:</label>
             </div>
             <a id="showForm" href="#">Add new contact</a>
-            <form id="addContact" action="#" style="display: block;">
-                <label for="photo">photo:</label><input id="photo" type="file"  />
-                <label for="type">Type:</label><input id="type" />
-                <label for="name">Name:</label><input id="name" />
-                <label for="address">Address:</label><input id="address" />
-                <label for="tel">Phone:</label><input id="phone" />
-                <label for="email">Email:</label><input id="email" />
-                <button id="add">Add</button>
+            <form id="addContact" action="#">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="photo">photo:</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="photo" type="file" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="type">Type:</label>
+                        </td>
+                        <td>
+                            <input id="type" />
+                        </td>                  
+                        <td>
+                            <label for="name">Name:</label>
+                        </td>
+                        <td>
+                            <input id="name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="address">Address:</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="address" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="tel">Phone:</label></td>
+                        <td><input id="phone" /></td>                    
+                        <td><label for="email">Email:</label></td>
+                        <td><input id="email" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button id="add">Add</button></td>
+                    </tr>
+                </table>
             </form>
         </header>
     </div>
@@ -60,12 +96,15 @@
                     <%=email %>
                 </a>
             </dd>
-        </dl>        
+        </dl>
+        <button class="delete">Delete</button>
     </script>
 
     <script type="text/javascript" src="scripts/libs/jquery-1.11.2.js"></script>
     <script type="text/javascript" src="scripts/libs/underscore.js"></script>
     <script type="text/javascript" src="scripts/libs/backbone.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
 </body>
 
