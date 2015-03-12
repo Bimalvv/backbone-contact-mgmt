@@ -60,6 +60,11 @@
 
     var Contact = Backbone.Model.extend({
         defaults: {
+            name: "",
+            address: "",
+            phone: "",
+            email: "",
+            type: "",
             photo: '/imgs/placeholder.png'
         }
     });
@@ -93,6 +98,9 @@
             /* Listening for the reset event and the function that 
                wish to invoke is the collection's render() method */
             this.collection.on("reset", this.render, this);
+            
+            this.collection.on("add", this.renderContact, this);
+            
             this.render();
         },
         render: function () {
@@ -113,7 +121,10 @@
         events: {
             /* Hooking the change event that will be fired by the
                <select /> element within the '#filter' container. */
-            "change #filter select": "setFilter"
+            "change #filter select": "setFilter",
+            /*  Hooking the click event triggered by the element 
+                with an id of add*/
+            "click #add": "addContact"
         },
         getTypes: function () {
             /* Method to extract each unique contact 'type' and returns 
@@ -158,11 +169,11 @@
             } else {
                 this.collection.reset(contacts, {
                     silent: true
-                    /* To make sure that reset event is not fired. 
-                       The view is not re-rendered unnecessarily when we reset the 
-                       collection at the start of the second branch of the conditional. 
-                       We need to do this so that we can filter by one type, and 
-                       then filter by another type without losing any models. */
+                        /* To make sure that reset event is not fired. 
+                           The view is not re-rendered unnecessarily when we reset the 
+                           collection at the start of the second branch of the conditional. 
+                           We need to do this so that we can filter by one type, and 
+                           then filter by another type without losing any models. */
                 });
 
                 var filterType = this.filterType;
@@ -176,6 +187,29 @@
                 /* Update the url with the selected type. */
                 contactsRouter.navigate("filter/" + filterType);
             }
+        },
+        addContact: function (e) {
+            e.preventDefault();
+
+            var newModel = {};
+            $("#addContact").children("input").each(function (i, el) {
+                /* Check that the field has had text entered into it */
+                if ($(el).val() !== "") {
+                    /* add a new property to the object with a 
+                            key equal to the id of the current element, and a 
+                            value equal to its current value. */
+                    newModel[el.id] = $(el).val();
+                }
+            });
+
+            contacts.push(newModel);
+
+            if (_.indexOf(this.getTypes(), newModel.type) === -1) {
+                this.collection.add(new Contact(newModel));
+                this.$el.find("#filter").find("select").remove().end().append(this.createSelect());
+            } else {
+                this.collection.add(new Contact(newModel));
+            }
         }
     });
 
@@ -183,14 +217,14 @@
         routes: {
             "filter/:type": "urlFilter"
         },
-        urlFilter: function(type) {
+        urlFilter: function (type) {
             directory.filterType = type;
             directory.trigger("change:filterType");
         }
     });
-    
+
     // Initiate the View
-    var directory = new DirectoryView();    
+    var directory = new DirectoryView();
     // Initiate the router
     var contactsRouter = new ContactsRouter();
     // Start Backbone history a necessary step for bookmarkable URL's

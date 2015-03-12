@@ -16,12 +16,47 @@ nav ul {
     padding: 0;
 }
 
+/* Create a style for the first level items */
 nav > ul > li > a {
-    color: #aaa;   
+    color: #aaa;
     display: block;
     line-height: 2em;
     padding: 0.5em 0.5em;
     text-decoration: none
+}
+
+nav li > ul li{
+    display: block;
+}
+
+nav  li > ul li a {
+    color: #111;
+    display: block;
+    line-height: 2em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+}
+
+/* Change the background color when mouse over items */
+nav li:hover {
+    background-color: #666;
+}
+/* display the submenu on mouse over main menu item*/
+nav li:hover > ul{
+    position:absolute;
+    display : block;
+}
+
+nav li > ul > li ul {
+    display: none;
+    background-color: #888;
+}
+
+nav li > ul > li:hover > ul {
+    position: absolute;
+    display: block;
+    margin-left: 100%;
+    margin-top: -3em
 }
 
 nav ul li {
@@ -30,7 +65,7 @@ nav ul li {
 }
 
 nav li:hover {
-    background-color:  #666;
+    background-color: #666;
 }
 
 .contact-container {
@@ -91,3 +126,71 @@ nav li:hover {
     width: 50px;
     clear: left;
 }
+
+.contact-container button {
+    margin-top: 10px;
+    float: right;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+header:after {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+}
+
+#filter {
+    float: left;
+}
+
+#showForm {
+    float: right;
+}
+
+#addContact {
+    display: none;
+    width: 466px;
+    float: right;
+    clear: both;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+#addContact label {
+    width: 60px;
+    margin-right: 10px;
+    text-align: right;
+    line-height: 25px;
+}
+
+/*#addContact label,
+#addContact input {
+    display: block;
+    margin-bottom: 10px;
+    float: left;
+}
+
+#address {
+    width: 380px;
+    margin-left: 2px;
+}
+
+#addContact label[for="name"],
+#addContact label[for="address"],
+#addContact label[for="phone"] {
+    clear: both;
+}
+
+#addContact button {
+    display: block;
+    margin: 10px 10px 0 0;
+    float: right;
+    clear: both;
+}*/

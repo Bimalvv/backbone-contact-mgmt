@@ -16,6 +16,11 @@
                 <li><a href="#">Home</a>
                 </li>
                 <li><a href="#">Contacts</a>
+                    <!--<ul>
+                        <li><a href="#">Add</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Delete</a></li>
+                    </ul>-->
                 </li>
                 <li><a href="#">About</a>
                 </li>
@@ -25,6 +30,16 @@
             <div id="filter">
                 <label>Show me:</label>
             </div>
+            <a id="showForm" href="#">Add new contact</a>
+            <form id="addContact" action="#" style="display: block;">
+                <label for="photo">photo:</label><input id="photo" type="file"  />
+                <label for="type">Type:</label><input id="type" />
+                <label for="name">Name:</label><input id="name" />
+                <label for="address">Address:</label><input id="address" />
+                <label for="tel">Phone:</label><input id="phone" />
+                <label for="email">Email:</label><input id="email" />
+                <button id="add">Add</button>
+            </form>
         </header>
     </div>
 
@@ -45,7 +60,7 @@
                     <%=email %>
                 </a>
             </dd>
-        </dl>
+        </dl>        
     </script>
 
     <script type="text/javascript" src="scripts/libs/jquery-1.11.2.js"></script>
